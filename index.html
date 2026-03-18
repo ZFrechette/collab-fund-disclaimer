@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Collaborative Fund — LP Portal Disclaimer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f0f0ec;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 24px rgba(0,0,0,0.10);
+      max-width: 620px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #1a1a1a;
+      padding: 20px 26px 18px;
+      color: #ffffff;
+    }
+    .header-logo {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 6px;
+    }
+    .header h1 {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 13px;
+      line-height: 1.3;
+    }
+    .header h1 span {
+      display: block;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 3px;
+    }
+    .instructions {
+      background: #262626;
+      border: 1px solid #363636;
+      border-radius: 6px;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f0f0f0;
+      line-height: 1.55;
+      letter-spacing: 0.01em;
+    }
+    .instructions strong { color: #ffffff; }
+    .step-list {
+      list-style: none;
+      margin-top: 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .step-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .step-badge {
+      background: #383838;
+      color: #ccc;
+      font-size: 9.5px;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    .progress-wrap {
+      padding: 12px 26px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-label {
+      font-size: 10.5px;
+      color: #aaa;
+      white-space: nowrap;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .progress-bar-track {
+      flex: 1;
+      height: 4px;
+      background: #e8e8e4;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #888;
+      border-radius: 99px;
+      transition: width 0.1s ease;
+    }
+    .progress-pct {
+      font-size: 10.5px;
+      color: #aaa;
+      font-variant-numeric: tabular-nums;
+      width: 32px;
+      text-align: right;
+    }
+
+    /* ── DISCLAIMER SCROLL WINDOW ── */
+    .nda-wrapper {
+      padding: 10px 26px 0;
+    }
+    .nda-scroll {
+      height: 300px;
+      overflow-y: scroll;
+      border: 1.5px solid #e0e0db;
+      border-radius: 6px;
+      padding: 16px 18px;
+      font-size: 11.5px;
+      line-height: 1.76;
+      color: #2a2a2a;
+      background: #fafaf8;
+      scroll-behavior: smooth;
+    }
+    .nda-scroll::-webkit-scrollbar { width: 6px; }
+    .nda-scroll::-webkit-scrollbar-track { background: #f0f0ec; border-radius: 99px; }
+    .nda-scroll::-webkit-scrollbar-thumb { background: #c8c8c0; border-radius: 99px; }
+    .nda-scroll::-webkit-scrollbar-thumb:hover { background: #aaa9a0; }
+
+    .disclaimer-header {
+      text-align: center;
+      margin-bottom: 14px;
+      padding-bottom: 13px;
+      border-bottom: 1px solid #e5e5e0;
+    }
+    .disclaimer-header .org {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 5px;
+    }
+    .disclaimer-header .ack-line {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #555;
+      line-height: 1.5;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .disclaimer-body p {
+      margin-bottom: 12px;
+      font-size: 11.5px;
+      color: #333;
+      line-height: 1.76;
+    }
+
+    .nda-end-marker {
+      text-align: center;
+      padding: 18px 0 2px;
+      font-size: 10px;
+      color: #bbb;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-top: 1px solid #e8e8e3;
+      margin-top: 6px;
+    }
+
+    /* ── SCROLL HINT ── */
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 26px 0;
+      font-size: 10.5px;
+      color: #bbb;
+      transition: opacity 0.3s;
+    }
+    .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+    .arrow-bounce {
+      display: inline-block;
+      animation: bounce 1.5s infinite;
+      font-size: 12px;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      55% { transform: translateY(3px); }
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 14px 26px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── TOAST ── */
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff8e1;
+      border: 1.5px solid #ffca28;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 11.5px;
+      color: #6d4c00;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    .toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .toast-icon { font-size: 13px; flex-shrink: 0; }
+
+    /* ── CONTINUE BUTTON ── */
+    .btn-continue {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s, color 0.2s;
+      background: #d4d4cc;
+      color: #9a9a92;
+    }
+    .btn-continue.locked { cursor: not-allowed; }
+    .btn-continue.unlocked {
+      background: #1a1a1a;
+      color: #ffffff;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.16);
+    }
+    .btn-continue.unlocked:hover {
+      background: #2f2f2f;
+      transform: translateY(-1px);
+      box-shadow: 0 5px 16px rgba(0,0,0,0.20);
+    }
+    .btn-continue.unlocked:active { transform: translateY(0); }
+
+    .footer-note {
+      text-align: center;
+      font-size: 10px;
+      color: #c0c0b8;
+      line-height: 1.6;
+    }
+
+    /* ── SUCCESS OVERLAY ── */
+    .success-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .success-overlay.show { display: flex; }
+    .success-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 36px 40px;
+      text-align: center;
+      max-width: 360px;
+      width: 90%;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+      animation: popIn 0.26s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.88); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+    .success-icon { font-size: 40px; margin-bottom: 12px; }
+    .success-box h2 { font-size: 17px; font-weight: 700; margin-bottom: 7px; color: #111; }
+    .success-box p { font-size: 12.5px; color: #666; line-height: 1.65; }
+    .btn-close {
+      margin-top: 20px;
+      padding: 10px 28px;
+      border-radius: 6px;
+      border: none;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-close:hover { background: #333; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- ── HEADER ── -->
+  <div class="header">
+    <div class="header-logo">Collaborative Fund &nbsp;·&nbsp; LP Portal</div>
+    <h1>Important Information, Legal Notices, and Disclaimers</h1>
+    <div class="instructions">
+      By clicking the "CONTINUE" button below, you acknowledge and agree to the following important information, legal notes, and disclaimers.
+    </div>
+  </div>
+
+  <!-- ── PROGRESS BAR ── -->
+  <div class="progress-wrap">
+    <span class="progress-label">Reading progress</span>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-pct" id="progressPct">0%</span>
+  </div>
+
+  <!-- ── DISCLAIMER SCROLL WINDOW ── -->
+  <div class="nda-wrapper">
+    <div class="nda-scroll" id="ndaScroll">
+
+      <div class="disclaimer-body">
+
+        <p>ALL THE MATERIALS PROVIDED, LINKED, OR REFERENCED IN THIS LP PORTAL (COLLECTIVELY, THE "LP MATERIALS") WERE PREPARED BY COLLABORATIVE FUND MANAGEMENT LLC (TOGETHER WITH ITS AFFILIATES AND/OR FUNDS MANAGED OR ADVISED BY ANY OF THE FOREGOING, "COLLABORATIVE") FOR INFORMATIONAL PURPOSES ONLY AND IS BEING PROVIDED TO YOU ("RECIPIENT") ON A CONFIDENTIAL BASIS FOR THE SOLE PURPOSE OF PROVIDING YOU BACKGROUND INFORMATION ON COLLABORATIVE. COLLABORATIVE IS PROVIDING THE LP MATERIALS AS A COURTESY AND NOT PURSUANT TO ANY CONTRACTUAL, FIDUCIARY OR OTHER OBLIGATION TO THE RECIPIENT OR ANY OTHER PERSON. COLLABORATIVE UNDERTAKES NO DUTY TO PROVIDE SIMILAR INFORMATION IN THE FUTURE OR TO UPDATE THE LP MATERIALS AS A RESULT OF NEW INFORMATION, CHANGED CIRCUMSTANCES, ERRORS OR OMISSIONS OR FOR ANY OTHER REASON. INFORMATION IS AS OF THE DATE OF LP MATERIALS UNLESS OTHERWISE NOTED AND HAS NOT BEEN UPDATED AND COLLABORATIVE UNDERTAKES NO OBLIGATION TO UPDATE THE INFORMATION.</p>
+
+        <p>THE LP MATERIALS AND ANY ORAL STATEMENTS MADE IN CONNECTION WITH THE LP MATERIALS DO NOT CONSTITUTE AN OFFER TO SELL, OR A SOLICITATION OF AN OFFER TO BUY, OR A RECOMMENDATION TO PURCHASE, OR ANY OTHER TYPE OF RECOMMENDATION OR ADVICE WITH RESPECT TO ANY SECURITIES, INCLUDING INVESTMENT, FINANCIAL, LEGAL, TAX, REGULATORY OR ANY OTHER FORM OF ADVICE. THE RECIPIENT UNDERSTANDS THAT NEITHER COLLABORATIVE, NOR ANY OF ITS AFFILIATES, DIRECTORS, OFFICERS, EMPLOYEES, REPRESENTATIVES, AGENTS OR ADVISERS, NOR ANY OF THEIR RESPECTIVE AFFILIATES, OFFICERS, EMPLOYEES OR AGENTS (COLLECTIVELY, "COLLABORATIVE REPRESENTATIVES") ARE ACTING FOR THE RECIPIENT IN ANY WAY. IN PARTICULAR, NEITHER COLLABORATIVE, NOR ANY COLLABORATIVE REPRESENTATIVE, IS ACTING IN A FIDUCIARY CAPACITY FOR THE RECIPIENT OR ADVISING THE RECIPIENT ON THE MERITS OF, OR MAKE ANY RECOMMENDATION TO THE RECIPIENT IN RELATION TO, THE TERMS OF ANY INVESTMENT, AND NO COLLABORATIVE REPRESENTATIVE IS AUTHORIZED TO BEHAVE IN ANY WAY WHICH WOULD LEAD THE RECIPIENT TO BELIEVE OTHERWISE.</p>
+
+        <p>CERTAIN PORTIONS OF THE LP MATERIALS MAY HAVE BEEN PROVIDED BY THIRD PARTIES OR ARE BASED ON INFORMATION RECEIVED FROM THIRD PARTIES. WHILE SUCH INFORMATION IS BELIEVED TO BE RELIABLE FOR THE PURPOSES USED IN THE LP MATERIALS, NEITHER COLLABORATIVE, NOR ANY COLLABORATIVE REPRESENTATIVE HAS INDEPENDENTLY VERIFIED THE ACCURACY OF ANY INFORMATION PROVIDED BY THIRD PARTIES, AND NEITHER COLLABORATIVE, NOR ANY COLLABORATIVE REPRESENTATIVE MAKES ANY REPRESENTATION OR WARRANTY, EXPRESS OR IMPLIED, AS TO THE ACCURACY OR COMPLETENESS OF THE INFORMATION CONTAINED IN THE LP MATERIALS AND THE RECIPIENT SHOULD NOT RELY ON IT IN MAKING AN INVESTMENT DECISION. CERTAIN ECONOMIC AND MARKET CONDITIONS CONTAINED IN THE LP MATERIALS HAS BEEN OBTAINED FROM PUBLISHED SOURCES AND/OR PREPARED BY THIRD-PARTIES AND IN CERTAIN CASES HAS NOT BEEN UPDATED THROUGH THE DATE HEREOF. ALL INFORMATION CONTAINED IN THE LP MATERIALS IS SUBJECT TO REVISION AND THE INFORMATION SET FORTH IN THE LP MATERIALS DOES NOT PURPORT TO BE COMPLETE.</p>
+
+        <p>COLLABORATIVE HAS DEEMED ALL OF THE INFORMATION PRESENTED AND ALL INFORMATION CONTAINED IN THE LP MATERIALS STRICTLY CONFIDENTIAL AND PROPRIETARY AND TO CONTAIN LEGALLY PROTECTABLE TRADE SECRETS. COLLABORATIVE BELIEVES THAT ANY DISCLOSURE BY A RECIPIENT IS CONTRARY TO THE BEST INTERESTS OF, OR COULD CAUSE IRREPARABLE HARM TO, COLLABORATIVE'S INVESTMENT VEHICLES OR THEIR INVESTMENTS. THE INFORMATION CONTAINED IN THE LP MATERIALS IS NOT GENERALLY KNOWN BY THE PUBLIC. BY ACCEPTING DELIVERY OF THE LP MATERIALS, THE RECIPIENT AGREES TO KEEP THE INFORMATION IN THE LP MATERIALS IN STRICT CONFIDENCE. THE INFORMATION PRESENTED AND CONTAINED IN THE LP MATERIALS MAY NOT BE REPRODUCED OR REDISTRIBUTED FOR ANY OTHER PURPOSES WITHOUT THE PRIOR WRITTEN PERMISSION OF COLLABORATIVE. RECIPIENT AGREES TO RETURN THIS DOCUMENT TO COLLABORATIVE AT ANY TIME UPON REQUEST. THE RECIPIENT MAY HAVE ALSO ENTERED INTO CERTAIN CONFIDENTIALITY OBLIGATIONS IN CONNECTION WITH ACCESSING INFORMATION PROVIDED BY, ON BEHALF OF, OR ABOUT COLLABORATIVE. THE LP MATERIALS ARE SUBJECT TO THE TERMS OF ANY SUCH CONFIDENTIALITY OBLIGATION INCLUDING WITHOUT LIMITATION USE RESTRICTION CONTAINED THEREIN.</p>
+
+        <p>NEITHER COLLABORATIVE, NOR ANY COLLABORATIVE REPRESENTATIVE, ACCEPTS ANY RESPONSIBILITY FOR, OR MAKES ANY REPRESENTATION, EXPRESS OR IMPLIED, OR GIVES ANY WARRANTY WITH RESPECT TO, THE FAIRNESS, ACCURACY, CURRENCY, RELIABILITY, REASONABLENESS OR COMPLETENESS OF THE INFORMATION CONTAINED IN THE LP MATERIALS. RECIPIENT AGREES THAT NEITHER COLLABORATIVE, NOR ANY COLLABORATIVE REPRESENTATIVE, SHALL HAVE ANY LIABILITY TO RECIPIENT OR RECIPIENT'S REPRESENTATIVES OR AGENTS RESULTING FROM THE LP MATERIALS AND THAT NEITHER RECIPIENT, NOR ITS REPRESENTATIVES OR AGENTS, WILL SUE COLLABORATIVE OR ANY COLLABORATIVE REPRESENTATIVE ON THE BASIS THAT ANY INFORMATION IN THE LP MATERIALS IS FOUND TO BE INACCURATE OR INCOMPLETE. ACCORDINGLY, TO THE FULLEST EXTENT POSSIBLE SUBJECT TO APPLICABLE LAW, NEITHER COLLABORATIVE, NOR ANY COLLABORATIVE REPRESENTATIVE, SHALL BE LIABLE FOR ANY LOSS (WHETHER DIRECT, INDIRECT OR CONSEQUENTIAL), DAMAGE, COST OR EXPENSE SUFFERED OR INCURRED BY ANY PERSON AS A RESULT OF RELYING ON ANY STATEMENT IN, OR OMISSION FROM, THE LP MATERIALS OR IN, OR OMITTED FROM, ANY OTHER INFORMATION OR COMMUNICATIONS PROVIDED OR ON OPINIONS COMMUNICATED IN RELATION THERETO OR OTHERWISE ARISING IN CONNECTION THEREWITH.</p>
+
+        <p>THERE CAN BE NO ASSURANCE THAT ANY INVESTMENT DESCRIBED IN THE LP MATERIALS WILL ACHIEVE ITS INVESTMENT OBJECTIVE OR AVOID SUBSTANTIAL LOSSES. ANY HISTORICAL PERFORMANCE INFORMATION SET FORTH IN THE LP MATERIALS OR ANY OTHER INFORMATION PROVIDED BY COLLABORATIVE OR ANY COLLABORATIVE REPRESENTATIVE IS NOT AN INDICATION OF FUTURE RESULTS AND SHOULD NOT BE SEEN AS ANY INDICATION OF RETURNS WHICH MIGHT BE ACHIEVED. THERE CAN BE NO GUARANTEE THAT ANY POTENTIAL INVESTMENT WILL BE ABLE TO ACHIEVE ITS INVESTMENT OBJECTIVES OR AS TO THE EXTENT OF RETURNS THAT INVESTORS WILL RECEIVE IN RESPECT OF ANY INVESTMENT THEY MAKE. PAST PERFORMANCE IS NOT A GUARANTEE OF FUTURE RESULTS AND THERE CAN BE NO ASSURANCE THAT FUTURE PERFORMANCE WILL BE COMPARABLE TO PAST PERFORMANCE OR THAT TARGETED INVESTMENT RESULTS WILL BE ACHIEVED. AN INVESTMENT OR INVESTMENT STRATEGY IS IMPACTED BY NUMEROUS FACTORS, INCLUDING MARKET AND ECONOMIC CONDITIONS. AS SUCH, NO HISTORICAL PERFORMANCE INFORMATION SET FORTH IN THE LP MATERIALS SHOULD BE RELIED UPON, INCLUDING FOR ANY FUTURE DECISION AS TO WHETHER OR NOT TO ACQUIRE AN INTEREST IN ANY POTENTIAL INVESTMENT.</p>
+
+        <p>CERTAIN INFORMATION CONTAINED IN LP MATERIALS CONSTITUTES "FORWARD-LOOKING STATEMENTS" THAT CAN BE IDENTIFIED BY THE USE OF FORWARD-LOOKING TERMINOLOGY SUCH AS "MAY," "WILL," "SHOULD," "EXPECT," "ANTICIPATE," "TARGET," "PROJECT," "ESTIMATE," "INTEND," "CONTINUE," OR "BELIEVE" OR THE NEGATIVES THEREOF OR OTHER VARIATIONS THEREON OR COMPARABLE TERMINOLOGY. DUE TO VARIOUS RISKS AND UNCERTAINTIES, ACTUAL EVENTS OR RESULTS OR THE ACTUAL PERFORMANCE OF ANY COLLABORATIVE INVESTMENT MAY DIFFER MATERIALLY FROM THOSE REFLECTED OR CONTEMPLATED IN SUCH FORWARD-LOOKING STATEMENTS. IN ADDITION, ANY FORWARD-LOOKING STATEMENTS (INCLUDING, WITHOUT LIMITATION, PROJECTIONS OF FUTURE EARNINGS, GROWTH, PROFITABILITY, EXIT MULTIPLES OR VALUE) CONTAINED IN THE LP MATERIALS ARE SUBJECT TO KNOWN AND UNKNOWN RISKS, UNCERTAINTIES AND OTHER FACTORS WHICH MAY CAUSE ACTUAL RESULTS TO BE MATERIALLY DIFFERENT FROM THOSE CONTEMPLATED IN SUCH STATEMENTS. IN MAKING AN INVESTMENT DECISION, THE RECIPIENT UNDERSTANDS THAT PROSPECTIVE INVESTORS MUST RELY ON THEIR OWN EXAMINATION OF THE LEGAL, TAXATION, REGULATORY, FINANCIAL AND OTHER CONSEQUENCES OF AN INVESTMENT BY THEM, INCLUDING THE MERITS OF INVESTING AND THE RISKS INVOLVED.</p>
+
+        <p>CERTAIN STATEMENTS CONTAINED IN THE LP MATERIALS REFLECT THE SUBJECTIVE VIEWS AND OPINIONS OF COLLABORATIVE. SUCH STATEMENTS CANNOT BE INDEPENDENTLY VERIFIED AND ARE SUBJECT TO CHANGE. PORTFOLIO COMPANIES PRESENTED IN THE LP MATERIALS DO NOT REPRESENT ALL COLLABORATIVE INVESTMENTS. IT SHOULD NOT BE ASSUMED THAT ANY INVESTMENTS IDENTIFIED AND DISCUSSED IN THE LP MATERIALS WERE OR WILL BE PROFITABLE. SPECIFIC COMPANIES PRESENTED IN THE LP MATERIALS ARE INCLUDED FOR ILLUSTRATIVE PURPOSES ONLY. CERTAIN STATEMENTS CONTAINED HEREIN REFLECT THE SUBJECTIVE VIEWS AND OPINIONS OF COLLABORATIVE FUND. ANY FORECASTS AND ESTIMATES CONTAINED IN THE LP MATERIALS (INCLUDING, WITHOUT LIMITATION, ANY PROJECTED PERFORMANCE METRICS) ARE NECESSARILY SPECULATIVE IN NATURE, INVOLVE ELEMENTS OF SUBJECTIVE JUDGMENT AND ANALYSIS, AND ARE BASED UPON CERTAIN ASSUMPTIONS AND THE BEST JUDGMENT OF COLLABORATIVE AND/OR THE PORTFOLIO COMPANY. IT CAN BE EXPECTED THAT SOME OR ALL OF SUCH ASSUMPTIONS WILL NOT MATERIALIZE OR WILL VARY SIGNIFICANTLY FROM ACTUAL RESULTS. ACCORDINGLY, THESE PROJECTIONS ARE ONLY AN ESTIMATE. ACTUAL RESULTS WILL DIFFER AND MAY VARY SUBSTANTIALLY FROM THE RESULTS SHOWN OR PROJECTED IN THE LP MATERIALS. THE ESTIMATED FINANCIAL INFORMATION IS NOT A PREDICTION OR PROJECTION OF ACTUAL RESULTS AND THERE CAN BE NO ASSURANCE ANY SUCH TARGETS WILL BE ACHIEVED. THE ACTUAL RETURNS OF ANY INDIVIDUAL INVESTMENT CAN BE LOWER OR HIGHER, DEPENDING ON THE NATURE OF ANY INDIVIDUAL INVESTMENT. COLLABORATIVE'S EVALUATION OF AN INVESTMENT IS BASED, IN PART, ON COLLABORATIVE'S INTERNAL ANALYSIS AND EVALUATION OF THE INVESTMENT AND ON NUMEROUS INVESTMENT-SPECIFIC ASSUMPTIONS THAT MAY NOT BE CONSISTENT WITH FUTURE MARKET CONDITIONS AND THAT MAY SIGNIFICANTLY AFFECT ACTUAL INVESTMENT RESULTS. COLLABORATIVE'S ABILITY TO ACHIEVE INVESTMENT RESULTS CONSISTENT WITH THESE ESTIMATES DEPENDS SIGNIFICANTLY ON THE ACCURACY OF SUCH ASSUMPTIONS.</p>
+
+        <p>ANY PERFORMANCE INFORMATION CONTAINED IN THE LP MATERIALS IS SHOWN ON A GROSS BASIS UNLESS OTHERWISE NOTED. REFERENCES IN THE MATERIALS TO "GROSS IRR" AND REFERENCES TO "MOIC", "GROSS MOIC" OR "GROSS MULTIPLE" ARE TO THE INTERNAL RATE OF RETURN OR MULTIPLE OF INVESTED CAPITAL, RESPECTIVELY, CALCULATED AT INVESTMENT LEVEL, AND THUS DO NOT TAKE INTO CONSIDERATION THE PAYMENT OF APPLICABLE MANAGEMENT FEES, CARRIED INTEREST, TRANSACTION COSTS, AND OTHER EXPENSES BORNE BY THE RELEVANT FUND OR ACCOUNT, WHICH WILL HAVE A MATERIAL IMPACT ON RETURNS. IN THE CASE OF UNREALIZED INVESTMENTS, THE GROSS RETURNS ARE BASED ON INTERNAL VALUATIONS BY COLLABORATIVE OF UNREALIZED INVESTMENTS AS OF THE APPLICABLE DATE. THE ACTUAL REALIZED RETURNS ON SUCH UNREALIZED INVESTMENTS WILL DEPEND ON, AMONG OTHER FACTORS, FUTURE OPERATING RESULTS, THE VALUE OF THE ASSETS, AND MARKET CONDITIONS AT THE TIME OF DISPOSITION, ANY RELATED TRANSACTION COSTS, AND THE TIMING AND MANNER OF SALE, ALL OF WHICH MAY DIFFER FROM THE ASSUMPTIONS ON WHICH THE VALUATIONS USED IN THE PRIOR PERFORMANCE DATA CONTAINED IN THE LP MATERIALS ARE BASED. ACCORDINGLY, THE ACTUAL REALIZED RETURN OF THESE UNREALIZED INVESTMENTS MAY DIFFER MATERIALLY FROM THE RETURNS INDICATED IN THE LP MATERIALS. CALCULATIONS OF NET IRR CONTAINED IN THE LP MATERIALS INCLUDE THE IMPACT OF FUND-LEVEL SUBSCRIPTION FACILITIES; HOWEVER, THE IMPACT OF SUCH SUBSCRIPTION FACILITIES DOES NOT HAVE A MATERIAL EFFECT ON THE NET IRR PERFORMANCE SHOWN IN THE LP MATERIALS.</p>
+
+        <p>REFERENCES TO "NET IRR" ARE TO THE INTERNAL RATE OF RETURN CALCULATED AT FUND LEVEL, AFTER PAYMENT OF APPLICABLE MANAGEMENT FEES AND CARRIED INTEREST AND OTHER APPLICABLE EXPENSES; HOWEVER, WHERE NET IRRS ARE SHOWN AT THE INVESTMENT LEVEL, THEY ARE BEFORE MANAGEMENT FEES, AS MANAGEMENT FEES ARE APPLIED ONLY AT THE FUND LEVEL. IN ADDITION, REFERENCES TO "NET TVPI" OR "NET DPI" ARE TO THE MULTIPLE OF INVESTED CAPITAL CALCULATED AFTER PAYMENT OF APPLICABLE CARRIED INTEREST, MANAGEMENT FEES AND OTHER APPLICABLE EXPENSES. INTERNAL RATES OF RETURN ARE COMPUTED ON A "DOLLAR-WEIGHTED" BASIS, WHICH TAKES INTO ACCOUNT THE TIMING OF CASH FLOWS, THE AMOUNTS INVESTED AT ANY GIVEN TIME, AND UNREALIZED VALUES AS OF THE RELEVANT VALUATION DATE.</p>
+
+        <p>SHADING ON THE CHART CONTAINED IN THE "PERFORMANCE" SECTION OF THE LP MATERIALS DENOTES TOP DECILE/QUARTILE PERFORMANCE BASED ON THE LISTED BENCHMARKING MATERIALS. COLLAB I - US C, LLC IS ONE OF SEVERAL CO-INVEST SPECIAL PURPOSE VEHICLES ("SPVS") FORMED AND MANAGED BY COLLABORATIVE. NONE OF THE OTHER COLLABORATIVE SPVS ARE PRESENTED IN THE "PERFORMANCE" SECTION OF THE LP MATERIALS, NOR ARE ANY OF THE FUNDS MANAGED BY COLLABORATIVE THAT ARE NOT IN HARVEST MODE, INCLUDING WITHOUT LIMITATION COLLAB GROWTH II (2020), COLLAB V (2022), SOS I (2022), COLLAB VI (2025); SOS II (2025), COLLAB+AIR (2025).</p>
+
+        <p>IN HIS CAPACITY AS A STRATEGIC ADVISOR TO COLLABORATIVE, THOMAS MCMURRAY PROVIDES COLLABORATIVE WITH HIS INSIGHT WITH RESPECT TO THE VENTURE CAPITAL INDUSTRY, FIRM BUILDING, BUSINESS STRATEGY, AND TALENT STRATEGY. MR. MCMURRAY DOES NOT PERFORM ANY OF THE FOLLOWING FOR COLLABORATIVE: PROVIDE INVESTMENT ADVICE, MAKE INVESTMENT DECISIONS, OR SOURCE INVESTMENT OPPORTUNITIES. MR. MCMURRAY IS ALSO A VENTURE PARTNER WITH THE AURORA FUNDS, INC. COLLABORATIVE FUND MANAGEMENT LLC IS A DISTINCT INVESTMENT ADVISOR ENTITY FROM THE AURORA FUNDS, INC. THEY ARE UNITARY ENTERPRISES AND OPERATE INDEPENDENTLY OF ONE ANOTHER.</p>
+
+        <p>INVESTOR OR FOUNDER TESTIMONIALS CONTAINED IN THE LP MATERIALS DO NOT NECESSARILY REPRESENT THE VIEWS OF ALL INVESTORS OR FOUNDERS. INVESTORS OR FOUNDERS PROVIDING TESTIMONIALS IN THE LP MATERIALS MAY BE INCENTIVIZED TO MAKE POSITIVE STATEMENTS ABOUT COLLABORATIVE AND THEIR EXPERIENCES WITH COLLABORATIVE TO MAINTAIN GOODWILL WITH COLLABORATIVE, WHICH CREATES A POTENTIAL CONFLICT OF INTEREST.</p>
+
+        <p>NO SECURITIES COMMISSION OR REGULATORY AUTHORITY IN THE UNITED STATES OR IN ANY OTHER COUNTRY HAS IN ANY WAY EVALUATED OR APPROVED THE MERITS OF AN INVESTMENT ASSOCIATED WITH COLLABORATIVE, OR THE ACCURACY OR ADEQUACY OF THE INFORMATION OR MATERIAL CONTAINED IN THE LP MATERIALS. THIS INFORMATION IS NOT, AND UNDER NO CIRCUMSTANCES IS TO BE CONSTRUED AS, A PROSPECTUS, A PUBLIC OFFERING, OR AN OFFERING MEMORANDUM AS DEFINED UNDER APPLICABLE SECURITIES LEGISLATION. THE INFORMATION CONTAINED IN THE LP MATERIALS DOES NOT SET FORTH ALL OF THE TERMS, CONDITIONS AND RISKS OF ANY POTENTIAL INVESTMENT. PROSPECTIVE INVESTORS ARE ADVISED TO CONSULT WITH THEIR OWN INDEPENDENT ADVISORS, INCLUDING TAX ADVISORS, REGARDING A POTENTIAL INVESTMENT. THE LP MATERIALS DOES NOT CONSTITUTE OR FORM PART OF AN OFFER TO ISSUE OR SELL, OR OF A SOLICITATION OF AN OFFER TO SUBSCRIBE OR BUY, ANY SECURITIES OR OTHER FINANCIAL INSTRUMENTS, NOR DOES IT CONSTITUTE A FINANCIAL PROMOTION, INVESTMENT ADVICE OR AN INDUCEMENT OR INCITEMENT TO PARTICIPATE IN ANY PRODUCE, OFFERING OR INVESTMENT. ANY OFFER TO PURCHASE OR BUY SECURITIES OR OTHER FINANCIAL INSTRUMENTS WILL BE MADE ONLY PURSUANT TO AN OFFERING DOCUMENT AND A DEFINITIVE SUBSCRIPTION AGREEMENT, WHICH WILL BE FURNISHED TO QUALIFIED INVESTORS ON A CONFIDENTIAL BASIS AT THEIR REQUEST FOR THEIR CONSIDERATION IN CONNECTION WITH ANY SUCH OFFERING, AND WILL BE MADE IN RELIANCE ON AN EXEMPTION FROM REGISTRATION UNDER THE SECURITIES ACT OF 1933, AS AMENDED, FOR OFFERS AND SALES OF SECURITIES THAT DO NOT INVOLVE A PUBLIC OFFERING.</p>
+
+        <p>LIKE ALL INVESTMENTS, INVESTING IN ANY FUND OR INVESTMENT INVOLVES SIGNIFICANT RISKS, INCLUDING LOSS OF THE ENTIRE INVESTMENT. EACH INVESTMENT IS SUBJECT TO ITS OWN UNIQUE RISKS AND THE FINANCIAL PERFORMANCE OF THE INVESTMENTS WILL VARY FROM INVESTMENT TO INVESTMENT AND THOSE VARIANCES MAY BE MATERIAL. AN INVESTMENT OR INVESTMENT STRATEGY IS IMPACTED BY NUMEROUS FACTORS, INCLUDING MARKET AND ECONOMIC CONDITIONS, WHICH ARE OUT OF THE CONTROL OF COLLABORATIVE AND WHICH MAY RESULT IN A LOSS TO INVESTORS. INVESTMENT PRODUCTS OFFERED BY COLLABORATIVE ARE DESIGNED ONLY FOR SOPHISTICATED INVESTORS WHO ARE ABLE TO SUSTAIN THE LOSS OF THEIR INVESTMENT. ACCORDINGLY, SUCH INVESTMENT PRODUCTS ARE NOT SUITABLE FOR ALL INVESTORS. ANY INVESTMENT VEHICLE OFFERED BY COLLABORATIVE IS NOT SUBJECT TO THE SAME OR SIMILAR REGULATORY REQUIREMENTS AS MUTUAL FUNDS OR OTHER MORE REGULATED COLLECTIVE INVESTMENT VEHICLES.</p>
+
+        <p>RECIPIENT'S ACCEPTANCE OF THE LP MATERIALS SHALL CONSTITUTE AN AGREEMENT TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS DISCLAIMER. IF ANY SUCH TERMS ARE NOT ACCEPTABLE, THE LP MATERIALS MUST BE PROMPTLY RETURNED TO COLLABORATIVE.</p>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SCROLL HINT ── -->
+  <div class="scroll-hint" id="scrollHint">
+    <span class="arrow-bounce">↓</span>
+    <span>Scroll to the bottom of the disclaimer to enable the Continue button.</span>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <div class="toast" id="toast">
+      <span class="toast-icon">⚠️</span>
+      <span id="toastMsg">You cannot continue until you finish reading the disclaimer.</span>
+    </div>
+    <button class="btn-continue locked" id="btnContinue" onclick="handleContinue()">
+      Continue
+    </button>
+    <p class="footer-note">
+      By clicking the "CONTINUE" button above, you acknowledge and agree to the above important information, legal notes, and disclaimers.
+    </p>
+  </div>
+
+</div>
+
+<!-- ── SUCCESS OVERLAY ── -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon">✅</div>
+    <h2>Disclaimer Accepted</h2>
+    <p>Thank you. Your acknowledgment has been recorded.<br>You may now proceed to the LP Portal.</p>
+    <button class="btn-close" onclick="document.getElementById('successOverlay').classList.remove('show')">Enter Portal</button>
+  </div>
+</div>
+
+<script>
+  const scroll   = document.getElementById('ndaScroll');
+  const btn      = document.getElementById('btnContinue');
+  const toast    = document.getElementById('toast');
+  const toastMsg = document.getElementById('toastMsg');
+  const hint     = document.getElementById('scrollHint');
+  const fill     = document.getElementById('progressFill');
+  const pct      = document.getElementById('progressPct');
+
+  let currentPct    = 0;
+  let reachedBottom = false;
+  let toastTimer    = null;
+
+  function updateProgress() {
+    const scrollable = scroll.scrollHeight - scroll.clientHeight;
+    if (scrollable <= 0) {
+      // Content fits without scrolling — treat as fully read
+      unlock();
+      return;
+    }
+
+    const ratio   = scroll.scrollTop / scrollable;
+    currentPct    = Math.min(100, Math.round(ratio * 100));
+
+    fill.style.width = currentPct + '%';
+    pct.textContent  = currentPct + '%';
+
+    if (currentPct >= 100) {
+      unlock();
+    }
+  }
+
+  function unlock() {
+    if (!reachedBottom) {
+      reachedBottom = true;
+      btn.classList.remove('locked');
+      btn.classList.add('unlocked');
+      hint.classList.add('hidden');
+      fill.style.background = '#4a9e6f';
+      pct.style.color = '#4a9e6f';
+      fill.style.width = '100%';
+      pct.textContent = '100%';
+    }
+  }
+
+  scroll.addEventListener('scroll', updateProgress);
+
+  function handleContinue() {
+    if (!reachedBottom) {
+      // Tailor message based on how far they've gotten
+      if (currentPct === 0) {
+        toastMsg.textContent = 'You must read the disclaimer before continuing.';
+      } else {
+        toastMsg.textContent = 'You cannot continue until you finish reading — reading progress must reach 100%.';
+      }
+      showToast();
+      scroll.style.outline = '2px solid #ffca28';
+      setTimeout(() => scroll.style.outline = '', 1400);
+      return;
+    }
+    document.getElementById('successOverlay').classList.add('show');
+  }
+
+  function showToast() {
+    clearTimeout(toastTimer);
+    toast.classList.add('visible');
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), 4000);
+  }
+
+  // Check on load in case content is short enough to not scroll
+  updateProgress();
+</script>
+</body>
+</html>
